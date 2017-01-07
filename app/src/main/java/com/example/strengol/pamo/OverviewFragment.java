@@ -32,10 +32,13 @@ public class OverviewFragment extends Fragment {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.button1:
-                        updateDetail("Szczegółowe informacje o elemencie pierwszym.");
+                        updateDetail(
+                                "East Asia modern Folks Compilation",
+                                "Asia traditional Folks artists have been adapting to the changes of modern music by combining EDM effects with this several thousands year old gerne. Therefore, both fan of Traditional Eastern Sound and EDM can enjoy these beautiful tracks. ",
+                                "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/kbjhO3iX1GY\" frameborder=\"0\" allowfullscreen></iframe>");
                         break;
                     case R.id.button2:
-                        updateDetail("Szczegółowe informacje o elemencie drugim.");
+                        updateDetail("title2","Szczegółowe informacje o elemencie drugim.","bbb");
                         break;
                     default:
                         break;
@@ -55,7 +58,7 @@ public class OverviewFragment extends Fragment {
 
     // interfejs, który będzie implementować aktywność
     public interface OverviewFragmentActivityListener {
-        public void onItemSelected(String msg);
+        public void onItemSelected(String title,String msg,String link);
     }
 
     @Override
@@ -69,7 +72,7 @@ public class OverviewFragment extends Fragment {
     }
 
     // metoda wysyła dane do aktywności
-    public void updateDetail(String msg) {
-        listener.onItemSelected(msg);
+    public void updateDetail(String title,String msg,String link) {
+        listener.onItemSelected(title,msg,link);
     }
 }

@@ -21,8 +21,12 @@ public class DetailFragment extends android.app.Fragment {
         return view;
     }
 
-    public void setText(String txt) {
+    public void setText(String title,String msg) {
         TextView view = (TextView) getView().findViewById(R.id.detailsText);
-        view.setText(txt);
+        view.setText(title);
+        TextView aaa = (TextView) getView().findViewById(R.id.linkText);
+        aaa.setText(msg);
+
     }
+
 }

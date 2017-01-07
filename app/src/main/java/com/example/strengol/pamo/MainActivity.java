@@ -16,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity
     private boolean isLand = false;
     private final FragmentManager fm = getFragmentManager();
     private Fragment currentFragment = null;
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +62,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemSelected(String msg) {
+    public void onItemSelected(String title,String msg,String link) {
+
         DetailFragment fragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.detailFragment);
 
         if (fragment != null && fragment.isInLayout()) {
-            fragment.setText(msg);
+            fragment.setText(title,msg);
         } else {
 
             // w trybie portrait podmieniamy fragmenty w kontenerze
@@ -75,8 +79,11 @@ public class MainActivity extends AppCompatActivity
             this.fm.executePendingTransactions();
 
             // ustawiamy tekst fragmentu
-            ((DetailFragment) this.currentFragment).setText(msg);
+            ((DetailFragment) this.currentFragment).setText(title,link);
+
         }
+
+        setMovie(link);
 
     }
 
@@ -168,6 +175,14 @@ public class MainActivity extends AppCompatActivity
 
         // zatwierdzamy transakcję
         ft.commit();
+    }
+    private void setMovie(String link){
+        webView=(WebView)findViewById(R.id.video);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadData(link,"text/html","utf-8");
+        webView.setWebChromeClient(new WebChromeClient(){
+
+        });
     }
 
 }
