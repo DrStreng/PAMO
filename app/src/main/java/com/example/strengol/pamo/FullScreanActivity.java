@@ -18,8 +18,8 @@ public class FullScreanActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String val1 = intent.getStringExtra("val1");
-        TextView textView=(TextView) findViewById(R.id.message);
-        textView.setText(val1+"\n");
+//        TextView textView=(TextView) findViewById(R.id.message);
+//        textView.setText(val1+"\n");
 
         webView =(WebView)findViewById(R.id.myfullscrean);
         webView.getSettings().setJavaScriptEnabled(true);
