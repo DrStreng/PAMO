@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,OverviewFragment.OverviewFragmentActivityListener {
@@ -28,10 +30,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.isLand = getResources().getBoolean(R.bool.isLand);
 
+        this.isLand = getResources().getBoolean(R.bool.isLand);
         if(!this.isLand){
-            setOverviewFragment();
+            setHomeFragment();
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,16 +119,25 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+
+            if(!this.isLand){
+                setHomeFragment();
+            } else {
+               Toast ee =  Toast.makeText(getApplicationContext(),"Juz jest na stronie",Toast.LENGTH_SHORT);
+                ee.show();
+            }
+
         } else if (id == R.id.nav_gallery) {
+            if(!this.isLand){
+                setOverviewFragment();
+            } else {
+                Toast ee =  Toast.makeText(getApplicationContext(),"Juz jest na stronie",Toast.LENGTH_SHORT);
+                ee.show();
+            }
 
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 
@@ -140,7 +151,12 @@ public class MainActivity extends AppCompatActivity
         ft.replace(R.id.fragment_container, this.currentFragment);
         ft.commit();
     }
-
+    private void setHomeFragment() {
+        FragmentTransaction ft = this.fm.beginTransaction();
+        this.currentFragment = new HomePageFragment();
+        ft.replace(R.id.fragment_container, this.currentFragment);
+        ft.commit();
+    }
     private void setDetailsFragment() {
         FragmentTransaction ft = this.fm.beginTransaction();
         this.currentFragment = new DetailFragment();

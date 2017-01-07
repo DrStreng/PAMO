@@ -15,6 +15,14 @@
     tools:showIn="@layout/app_bar_main">
 
     <fragment
+        android:id="@+id/omePageFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        class="com.example.strengol.pamo.HomePageFragment" >
+    </fragment>
+
+    <fragment
         android:id="@+id/overviewFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
