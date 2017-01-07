@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">PAMO</string>
+    <string name="google_place_api">AIzaSyCIx1njA20FLFF2Z5EnEqre_KDewMhAaUM</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

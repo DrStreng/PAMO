@@ -124,7 +124,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_gallery) {
             if(!this.isLand){
-                setHomeFragment();
+                Intent intent = new Intent(this, Google.class);
+                intent.putExtra("val1", "SUPER");
+                startActivityForResult(intent, REQUEST_CODE);
             } else {
                 Toast ee =  Toast.makeText(getApplicationContext(),"Juz jest na stronie",Toast.LENGTH_SHORT);
                 ee.show();
