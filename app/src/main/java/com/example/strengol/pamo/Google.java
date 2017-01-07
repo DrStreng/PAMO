@@ -41,15 +41,15 @@ public class Google extends Activity {
         });
     }
 
-        protected void onActivityResult(int requestCode,int resultCode,Intent data){
-            if(requestCode==PLACE_PICKER_REQIEST){
-                if(requestCode==RESULT_OK){
-                    Place place = PlacePicker.getPlace(this,data);
-                    String address = String.format("Place: %s",place.getAddress());
-                    get_place.setText(address);
-                }
-            }
-    }
+//        protected void onActivityResult(int requestCode,int resultCode,Intent data){
+//            if(requestCode==PLACE_PICKER_REQIEST){
+//                if(requestCode==RESULT_OK){
+//                    Place place = PlacePicker.getPlace(this,data);
+//                    String address = String.format("Place: %s",place.getAddress());
+//                    get_place.setText(address);
+//                }
+//            }
+//    }
 
 
 

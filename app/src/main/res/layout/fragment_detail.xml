@@ -90,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/link"
                 android:layout_weight="0.03"
+                android:visibility="invisible"
                 android:enabled="false" />
 
         </LinearLayout>

@@ -37,7 +37,18 @@ public class OverviewFragment extends Fragment {
                                 "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/kbjhO3iX1GY\" frameborder=\"0\" allowfullscreen></iframe>");
                         break;
                     case R.id.button2:
-                        updateDetail(2,"title2","Szczegółowe informacje o elemencie drugim.","bbb");
+                        updateDetail(
+                                2,
+                                "Blender Node ",
+                                "Moje tworcze blendery",
+                                "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/v2XUDcc3SN8\" frameborder=\"0\" allowfullscreen></iframe>");
+                        break;
+                    case R.id.button3:
+                        updateDetail(
+                                3,
+                                "When you go dark souls with your best mates",
+                                "Domani mattina parto per la sardegna per una settimana e l'idea di allontanarmi da SFM mi mette un po a disagio, quindi per rimediare a questo ho deciso di salutarvi con un video :D",
+                                "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/bzJDimvPW1Y\" frameborder=\"0\" allowfullscreen></iframe>");
                         break;
                     default:
                         break;
@@ -47,9 +58,11 @@ public class OverviewFragment extends Fragment {
 
         Button button1 = (Button) view.findViewById(R.id.button1);
         Button button2 = (Button) view.findViewById(R.id.button2);
+        Button button3 = (Button) view.findViewById(R.id.button3);
 
         button1.setOnClickListener(clickListener);
         button2.setOnClickListener(clickListener);
+        button3.setOnClickListener(clickListener);
 
         return view;
     }
