@@ -3,11 +3,8 @@ package com.example.strengol.pamo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,12 +18,14 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,OverviewFragment.OverviewFragmentActivityListener {
+        implements NavigationView.OnNavigationItemSelectedListener,OverviewFragment.OverviewFragmentActivityListener,DetailFragment.DetailFragmentActivityListener {
 
     private boolean isLand = false;
     private final FragmentManager fm = getFragmentManager();
     private Fragment currentFragment = null;
     WebView webView;
+    private final int REQUEST_CODE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +40,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -62,28 +52,26 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemSelected(String title,String msg,String link) {
-
-        DetailFragment fragment = (DetailFragment) getFragmentManager()
-                .findFragmentById(R.id.detailFragment);
+    public void onItemSelected(int id,String title,String msg,String link) {
+        DetailFragment fragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.detailFragment);
 
         if (fragment != null && fragment.isInLayout()) {
-            fragment.setText(title,msg);
+            fragment.setText(id,title,msg,link);
         } else {
-
-            // w trybie portrait podmieniamy fragmenty w kontenerze
             setDetailsFragment();
-
-            // upewniamy się, że transakcja jest gotowa
-            // i możemy korzystać z fragmentu
             this.fm.executePendingTransactions();
-
-            // ustawiamy tekst fragmentu
-            ((DetailFragment) this.currentFragment).setText(title,link);
-
+            ((DetailFragment) this.currentFragment).setText(id,title,msg,link);
         }
 
         setMovie(link);
+    }
+
+    @Override
+    public void onClickFullScreen(String link) {
+
+        Intent intent = new Intent(this, FullScreanActivity.class);
+        intent.putExtra("val1", link);
+        startActivityForResult(intent, REQUEST_CODE);
 
     }
 
@@ -136,16 +124,19 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_gallery) {
             if(!this.isLand){
-                setOverviewFragment();
+                setHomeFragment();
             } else {
                 Toast ee =  Toast.makeText(getApplicationContext(),"Juz jest na stronie",Toast.LENGTH_SHORT);
                 ee.show();
             }
 
         } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+            if(!this.isLand){
+                setOverviewFragment();
+            } else {
+                Toast ee =  Toast.makeText(getApplicationContext(),"Juz jest na stronie",Toast.LENGTH_SHORT);
+                ee.show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -169,11 +160,7 @@ public class MainActivity extends AppCompatActivity
         this.currentFragment = new DetailFragment();
         ft.replace(R.id.fragment_container, this.currentFragment);
 
-        // dodajemy transakcję na stos
-        // dzięki temu możemy wrócić przyciskiem BACK
         ft.addToBackStack(null);
-
-        // zatwierdzamy transakcję
         ft.commit();
     }
     private void setMovie(String link){
@@ -184,5 +171,6 @@ public class MainActivity extends AppCompatActivity
 
         });
     }
+
 
 }

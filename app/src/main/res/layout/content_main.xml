@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_main"
@@ -14,28 +14,47 @@
     android:orientation="horizontal"
     tools:showIn="@layout/app_bar_main">
 
-    <fragment
-        android:id="@+id/omePageFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        class="com.example.strengol.pamo.HomePageFragment" >
-    </fragment>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/overviewFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        class="com.example.strengol.pamo.OverviewFragment" >
-    </fragment>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <fragment
-        android:id="@+id/detailFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        class="com.example.strengol.pamo.DetailFragment" >
-    </fragment>
+            <fragment
+                    android:id="@+id/omePageFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                class="com.example.strengol.pamo.HomePageFragment" >
+                </fragment>
 
-</LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <fragment
+                        android:id="@+id/overviewFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        class="com.example.strengol.pamo.OverviewFragment" >
+                    </fragment>
+
+                <fragment
+                        android:id="@+id/detailFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        class="com.example.strengol.pamo.DetailFragment" >
+                    </fragment>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</GridLayout>
